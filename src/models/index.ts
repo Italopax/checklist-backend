@@ -29,3 +29,7 @@ export type ItemsGroupType = BaseEntityTpe & {
   user?: UserType;
   items?: ItemType[];
 }
+
+export type Session = {
+  userId: string;
+};
