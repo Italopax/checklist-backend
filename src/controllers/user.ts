@@ -12,7 +12,15 @@ export class UserController implements IUserController{
   }
   
   public create = async (request: Request, response: Response): Promise<void> => {
-    const user = await this.userService.createUser(request.body as UserType);
-    response.status(HttpStatus.OK).send(user);
+    const bodyInfos = {
+      email: request.body.email,
+      name: request.body.name,
+      password: request.body.password,
+    };
+
+    const user = await this.userService.createUser(bodyInfos);
+    response.status(HttpStatus.CREATED).send({
+      data: user,
+    });
   }
 }

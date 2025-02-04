@@ -1,8 +1,8 @@
-import { FindOneOptions, Repository } from "typeorm";
+import { FindOneOptions, In, Repository } from "typeorm";
 import { AppDataSource } from "../database";
 import { User } from "../database/entities";
 import { IUserRepository } from "./interfaces/user";
-import { UserType } from "../models";
+import { UserStatus, UserType } from "../models";
 
 export class UserRepository implements IUserRepository {
   private readonly repository: Repository<User>;
@@ -12,9 +12,24 @@ export class UserRepository implements IUserRepository {
   }
 
   public create = async (userInfo: UserType): Promise<UserType> => {
-    const userCreated = await this.repository.save(userInfo);
+    const { id, name, email, status } = await this.repository.save(userInfo);
+    return {
+      id,
+      name,
+      email,
+      status
+    };
+  }
 
-    return userCreated;
+  public selectValidAccountByEmail = async (email: string): Promise<UserType | null> => {
+    if (!email) return null;
+
+    return this.repository.findOne({
+      where: {
+        email,
+        status: In([UserStatus.ACTIVE, UserStatus.PENDING_VALIDATION]),
+      }
+    });
   }
 
   public selectOneByWhere = async (userParams: FindOneOptions<UserType>): Promise<UserType | null> => {

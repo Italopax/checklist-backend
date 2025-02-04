@@ -33,3 +33,9 @@ export type ItemsGroupType = BaseEntityTpe & {
 export type Session = {
   userId: string;
 };
+
+export enum UserStatus {
+  PENDING_VALIDATION = 1,
+  ACTIVE = 2,
+  INATIVE = 3,
+}
