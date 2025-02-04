@@ -23,6 +23,7 @@ export enum Errors {
   USER_OR_PAWWORD_INVALID = "Usuário ou senha incorretos.",
   INVALID_DATA_FORMAT = "Formato incorreto das informações.",
   INVALID_PARAMS = "Parâmetros inválidos.",
+  INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido"
 }
 
 export class BadRequest extends Error {
@@ -88,9 +89,22 @@ export const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  res.status(error.statusCode).send({
-    errorMessage: error.message,
-    status: error.statusCode,
-    type: error.name,
-  });
+  switch (true) {
+    case error instanceof BadRequest:
+    case error instanceof Unauthorized:
+    case error instanceof Forbidden:
+      res.status(error.statusCode).send({
+        errorMessage: error.message,
+        status: error.statusCode,
+        type: error.name,
+      });
+      break;
+
+    default:
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        errorMessage: Errors.INTERNAL_SERVER_ERROR,
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        type: Errors.INTERNAL_SERVER_ERROR,
+      });
+  }
 };

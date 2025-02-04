@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { initializeEnvs } from "./constants";
+import { errorHandler } from "./utils/error";
 
 (async () => {
   const app = express();
@@ -14,6 +15,7 @@ import { initializeEnvs } from "./constants";
   const { router} = require("./routes");
 
   app.use(router);
+  app.use(errorHandler);
 
   AppDataSource.initialize()
     .then(() => {
