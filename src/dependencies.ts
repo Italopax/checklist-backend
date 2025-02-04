@@ -15,7 +15,9 @@ import { IUserRepository } from "./repositories/interfaces/user";
 import { ItemRepository } from "./repositories/item";
 import { ItemsGroupRepository } from "./repositories/itemsGroup";
 import { UserRepository } from "./repositories/user";
+import { AuthService } from "./services/auth";
 import { CategoryService } from "./services/category";
+import { IAuthService } from "./services/interfaces/auth";
 import { ICategoryService } from "./services/interfaces/category";
 import { IItemService } from "./services/interfaces/item";
 import { IItemsGroupService } from "./services/interfaces/itemsGroup";
@@ -42,6 +44,7 @@ interface IDependencies {
   categoryController: ICategoryController;
 
   authController: IAuthController;
+  authService: IAuthService;
 }
 
 class Dependencies implements IDependencies {
@@ -64,6 +67,7 @@ class Dependencies implements IDependencies {
   public categoryController: ICategoryController;
 
   public authController: IAuthController;
+  public authService: IAuthService;
 
   constructor() {
     this.userRepository = new UserRepository();
@@ -81,8 +85,9 @@ class Dependencies implements IDependencies {
     this.catetoryRepository = new CategoryRepository();
     this.categoryService = new CategoryService(this.catetoryRepository);
     this.categoryController = new CategoryController(this.categoryService);
-
-    this.authController = new AuthController(this.userService);
+    
+    this.authService = new AuthService(this.userRepository);
+    this.authController = new AuthController(this.authService);
   }
 
   static getInstance = (): Dependencies => {

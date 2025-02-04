@@ -1,6 +1,6 @@
 import { Handler, Response, Request, NextFunction } from "express";
 
-export enum ErrorsName {
+enum ErrorsName {
   BAD_REQUEST = "BadRequest",
   UNAUTHORIZED = "Unauthorized",
   FORBIDDEN = "Forbidden",
@@ -20,7 +20,7 @@ export enum HttpStatus {
 export enum Errors {
   USER_ALREADY_CREATED = "Usuário já existente.",
   USER_NOT_FOUND = "Usuário não encontrado.",
-  USER_OR_PAWWORD_INVALID = "Usuário ou senha incorretos.",
+  USER_OR_PASSWORD_INVALID = "Usuário ou senha incorretos.",
   INVALID_DATA_FORMAT = "Formato incorreto das informações.",
   INVALID_PARAMS = "Parâmetros inválidos.",
   INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido"

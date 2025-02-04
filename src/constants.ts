@@ -7,6 +7,12 @@ export class Constants {
     password: string;
   }
 
+  jwt: {
+    secretKey: string;
+    accessTokenExpiration: number;
+    refreshTokenExpiration: number;
+  }
+
   constructor(props: { [key: string]: string }) {
     this.database = {
       host: props.DATABASE_HOST,
@@ -14,6 +20,12 @@ export class Constants {
       username: props.DATABASE_USERNAME,
       database: props.DATABASE_NAME,
       password: props.DATABASE_PASSWORD,
+    }
+
+    this.jwt = {
+      secretKey: props.JWT_SECRET,
+      accessTokenExpiration: Number(props.ACCESS_TOKEN_EXPIRATION),
+      refreshTokenExpiration: Number(props.REFRESH_TOKEN_EXPIRATION),
     }
   }
 }

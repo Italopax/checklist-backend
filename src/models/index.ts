@@ -13,6 +13,12 @@ export type UserType = BaseEntityTpe & {
   itemsGroups?: ItemsGroupType[];
 }
 
+export enum UserStatus {
+  PENDING_VALIDATION = 1,
+  ACTIVE = 2,
+  INATIVE = 3,
+}
+
 export type CategoryType = BaseEntityTpe & {
   name?: string;
   user?: UserType;
@@ -34,8 +40,27 @@ export type Session = {
   userId: string;
 };
 
-export enum UserStatus {
-  PENDING_VALIDATION = 1,
-  ACTIVE = 2,
-  INATIVE = 3,
+export type LoginCredentials = {
+  email: string;
+  password: string;
+}
+
+export type CookieObjectData = {
+  name: string;
+  value: string;
+  options: {
+    httpOnly: boolean;
+    secure: boolean;
+    maxAge: number;
+  };
+};
+
+export enum CookieNames {
+  ACCESS_TOKEN = "accessToken",
+  REFRESH_TOKEN = "refreshToken",
+}
+
+export type LoginCookiesData = {
+  accessTokenCookieValues: CookieObjectData,
+  refreshTokenCookieValues: CookieObjectData
 }

@@ -1,4 +1,3 @@
-import { UserType } from "../models";
 import { IUserService } from "../services/interfaces/user";
 import { HttpStatus } from "../utils/error";
 import { IUserController } from "./interfaces/user";

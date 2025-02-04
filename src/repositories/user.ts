@@ -11,7 +11,7 @@ export class UserRepository implements IUserRepository {
     this.repository = AppDataSource.getRepository(User);
   }
 
-  public create = async (userInfo: UserType): Promise<UserType> => {
+  public create = async(userInfo: UserType): Promise<UserType> => {
     const { id, name, email, status } = await this.repository.save(userInfo);
     return {
       id,
@@ -21,7 +21,7 @@ export class UserRepository implements IUserRepository {
     };
   }
 
-  public selectValidAccountByEmail = async (email: string): Promise<UserType | null> => {
+  public selectValidAccountByEmail = async(email: string): Promise<UserType | null> => {
     if (!email) return null;
 
     return this.repository.findOne({
@@ -32,8 +32,18 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public selectOneByWhere = async (userParams: FindOneOptions<UserType>): Promise<UserType | null> => {
+  public selectOneByWhere = async(userParams: FindOneOptions<UserType>): Promise<UserType | null> => {
     const userSelected = await this.repository.findOne(userParams);
     return userSelected;
+  }
+
+  public selectById = async(userId: number): Promise<UserType | null> => {
+    if (!userId) return null;
+
+    return this.repository.findOne({
+      where: {
+        id: userId,
+      }
+    });
   }
 }
