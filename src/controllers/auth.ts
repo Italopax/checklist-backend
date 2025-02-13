@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IAuthService } from "../services/interfaces/auth";
 import { IAuthController } from "./interfaces/auth";
-import { LoginCredentials } from "../models";
+import { LoginCredentials } from "../models/interfaces";
 import { HttpStatus } from "../utils/error";
 
 export class AuthController implements IAuthController {

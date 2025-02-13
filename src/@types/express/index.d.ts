@@ -1,4 +1,4 @@
-import { Session } from "../../models";
+import { Session } from "../../models/interfaces";
 
 declare global {
   namespace Express {

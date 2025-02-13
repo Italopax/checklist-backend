@@ -1,4 +1,4 @@
-import { CookieObjectData, LoginCookiesData, LoginCredentials } from "../../models";
+import { CookieObjectData, LoginCookiesData, LoginCredentials } from "../../models/interfaces";
 
 export interface IAuthService {
   generateLoginCookiesData({ email, password }: LoginCredentials): Promise<LoginCookiesData>;

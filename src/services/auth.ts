@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
-import { CookieNames, CookieObjectData, LoginCookiesData, LoginCredentials } from "../models";
+import { CookieObjectData, LoginCookiesData, LoginCredentials } from "../models/interfaces";
+import { CookieNames } from "../models/enums";
 import { IUserRepository } from "../repositories/interfaces/user";
 import { BadRequest, Errors, Unauthorized } from "../utils/error";
 import { IAuthService } from "./interfaces/auth";
