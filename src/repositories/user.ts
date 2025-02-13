@@ -2,7 +2,7 @@ import { FindOneOptions, In, Repository } from "typeorm";
 import { AppDataSource } from "../database";
 import { User } from "../database/entities";
 import { IUserRepository } from "./interfaces/user";
-import { UserStatus, UserType } from "../models";
+import { UserStatus, UserType } from "../models/types";
 
 export class UserRepository implements IUserRepository {
   private readonly repository: Repository<User>;
@@ -45,5 +45,22 @@ export class UserRepository implements IUserRepository {
         id: userId,
       }
     });
+  }
+
+  public updateUser = async(id: number, userInfo: UserType): Promise<UserType | null> => {
+    if (!id) return null; 
+
+    await this.repository.update(
+      {
+        id,
+      },
+      {
+        ...(userInfo.name && { name: userInfo.name }),
+        ...(userInfo.password && { password: userInfo.password }),
+        ...(userInfo.email && { email: userInfo.email }),
+      }
+    );
+
+    return this.selectById(id);
   }
 }

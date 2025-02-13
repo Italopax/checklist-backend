@@ -1,4 +1,5 @@
-import { UserStatus, UserType } from "../models";
+import { UserStatus, UserType } from "../models/types";
+import { Session } from "../models/interfaces";
 import { IUserRepository } from "../repositories/interfaces/user";
 import { validateEmail } from "../utils";
 import { BadRequest, Errors } from "../utils/error";
@@ -35,5 +36,22 @@ export class UserService implements IUserService {
 
     const createdUser = await this.userRepository.create(userDataToCreate);
     return createdUser;
+  }
+
+  public updateUser = async (session: Session, userData: UserType): Promise<UserType | null> => {
+    if (
+      !validateEmail(userData.email) &&
+      !userData.name &&
+      !userData.password
+    ) {
+      throw new BadRequest(Errors.INVALID_PARAMS);
+    }
+
+    if (userData.password) {
+      const hashPassword = bcrypt.hashSync(userData.password, 10);
+      userData.password = hashPassword;
+    }
+
+    return this.userRepository.updateUser(session.user.id as number, userData);
   }
 }

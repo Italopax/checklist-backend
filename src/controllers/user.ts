@@ -22,4 +22,17 @@ export class UserController implements IUserController{
       data: user,
     });
   }
+
+  public update = async (request: Request, response: Response): Promise<void> => {
+    const bodyInfos = {
+      email: request.body.email,
+      name: request.body.name,
+      password: request.body.password,
+    };
+
+    const user = await this.userService.updateUser(request.session, bodyInfos);
+    response.status(HttpStatus.OK).send({
+      data: user,
+    });
+  }
 }
