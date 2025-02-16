@@ -1,12 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export class EntityBase {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("timestamptz", { nullable: true })
+  @CreateDateColumn({ nullable: false, type: "timestamptz" })
   createdAt: Date;
 
-  @Column("timestamptz", { nullable: true })
+  @UpdateDateColumn({ nullable: false, type: "timestamptz" })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ nullable: false, type: "timestamptz" })
   deletedAt: Date;
 }
