@@ -2,11 +2,13 @@ import "dotenv/config";
 import express from "express";
 import { initializeEnvs } from "./constants";
 import { errorHandler } from "./utils/error";
+import cookieParser from "cookie-parser";
 
 (async () => {
   const app = express();
   const port = 3000;
   
+  app.use(cookieParser());
   app.use(express.json());
   
   await initializeEnvs({ ...process.env });
