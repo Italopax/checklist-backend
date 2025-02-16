@@ -66,6 +66,10 @@ export class UserService implements IUserService {
       userData.password = hashPassword;
     }
 
+    if (userData.email !== session.user.email) {
+      userData.status = UserStatus.PENDING_VALIDATION;
+    }
+
     return this.userRepository.updateUser(session.user.id as number, userData);
   }
 }
