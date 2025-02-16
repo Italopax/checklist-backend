@@ -1,4 +1,6 @@
 export class Constants {
+  debbug: boolean;
+
   database: {
     host: string;
     port: number;
@@ -14,6 +16,8 @@ export class Constants {
   }
 
   constructor(props: { [key: string]: string }) {
+    this.debbug = props.DEBBUG === 'true',
+
     this.database = {
       host: props.DATABASE_HOST,
       port: Number(props.DATABASE_PORT),

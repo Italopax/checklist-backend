@@ -1,4 +1,5 @@
 import { Handler, Response, Request, NextFunction } from "express";
+import { getEnv } from "../constants";
 
 enum ErrorsName {
   BAD_REQUEST = "BadRequest",
@@ -105,6 +106,7 @@ export const errorHandler = (
         errorMessage: Errors.INTERNAL_SERVER_ERROR,
         status: HttpStatus.INTERNAL_SERVER_ERROR,
         type: Errors.INTERNAL_SERVER_ERROR,
+        ...(getEnv().debbug && { stack: error.stack })
       });
   }
 };
