@@ -8,6 +8,7 @@ const router: Router = Router();
 const { userController } = Dependencies.getInstance();
 
 router.post("/create", routeHandler(userController.create));
+router.put("/me", auth, routeHandler(userController.getMe));
 router.put("/update", auth, routeHandler(userController.update));
 
 export default router;

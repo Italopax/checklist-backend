@@ -38,6 +38,20 @@ export class UserService implements IUserService {
     return createdUser;
   }
 
+  public getUser = async (session: Session): Promise<UserType> => {
+    if (!session.user.id) {
+      throw new BadRequest(Errors.USER_NOT_FOUND);
+    }
+
+    const user = await this.userRepository.selectById(session.user.id);
+
+    if (!user) {
+      throw new BadRequest(Errors.USER_NOT_FOUND);
+    }
+
+    return user;
+  }
+
   public updateUser = async (session: Session, userData: UserType): Promise<UserType | null> => {
     if (
       !validateEmail(userData.email) &&
