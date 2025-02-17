@@ -9,6 +9,7 @@ export type UserType = BaseEntityTpe & {
   name?: string;
   password?: string;
   status?: UserStatus;
+  verificationCode?: string | null;
   categories?: CategoryType[];
   itemsGroups?: ItemsGroupType[];
 }

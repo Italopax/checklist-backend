@@ -42,4 +42,11 @@ export class UserController implements IUserController{
       data: user,
     });
   }
+
+  public verifyEmailToken = async (request: Request, response: Response): Promise<void> => {
+    const { verificationCode } = request.body;
+
+    await this.userService.validateEmail(request.session, verificationCode);
+    response.status(HttpStatus.NO_CONTENT).send();
+  }
 }

@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { getEnv } from "../constants";
-import { Errors, Unauthorized } from "../utils/error";
+import { Errors, routeHandler, Unauthorized } from "../utils/error";
 import { User } from "../database/entities";
 import { AppDataSource } from "../database";
 
 const ConstantEnvs = getEnv();
 
-export const auth = async (req: Request, res: Response, next: NextFunction) => {
-  const { accessToken } = req.cookies;
+export const auth = routeHandler(async (request: Request, response: Response, next: NextFunction) => {
+  const { accessToken } = request.cookies;
 
   if (!accessToken) throw new Unauthorized(Errors.INVALID_PARAMS);
 
@@ -21,13 +21,12 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
       }
     });
 
-    req.session = {
+    request.session = {
       user,
     };
 
     next();
   } catch (error) {
-    console.log(error);
     throw new Unauthorized(Errors.INVALID_PARAMS);
   }
-};
+});

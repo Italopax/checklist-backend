@@ -15,6 +15,9 @@ export class User extends EntityBase {
   @Column()
   status: number;
 
+  @Column({ type: "varchar", nullable: true })
+  verificationCode: string | null;
+
   @OneToMany(() => Category, (category) => category.user)
   categories: Category[];
 

@@ -9,6 +9,7 @@ const { userController } = Dependencies.getInstance();
 
 router.post("/create", routeHandler(userController.create));
 router.get("/me", auth, routeHandler(userController.getMe));
+router.post("/verify-email", auth, routeHandler(userController.verifyEmailToken));
 router.put("/update", auth, routeHandler(userController.update));
 
 export default router;

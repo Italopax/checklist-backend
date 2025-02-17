@@ -36,11 +36,6 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public selectOneByWhere = async(userParams: FindOneOptions<UserType>): Promise<UserType | null> => {
-    const userSelected = await this.repository.findOne(userParams);
-    return userSelected;
-  }
-
   public selectById = async(userId: number, selectPassword?: boolean): Promise<UserType | null> => {
     if (!userId) return null;
 
@@ -54,8 +49,8 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public updateUser = async(id: number, userInfo: UserType): Promise<UserType | null> => {
-    if (!id) return null; 
+  public updateUser = async(id: number, userInfo: UserType, makeVericationCodeNull?: boolean): Promise<UserType | null> => {
+    if (!id) return null;
 
     await this.repository.update(
       {
@@ -65,6 +60,9 @@ export class UserRepository implements IUserRepository {
         ...(userInfo.name && { name: userInfo.name }),
         ...(userInfo.password && { password: userInfo.password }),
         ...(userInfo.email && { email: userInfo.email }),
+        ...(userInfo.status && { status: userInfo.status }),
+        ...(userInfo.verificationCode && { verificationCode: userInfo.verificationCode }),
+        ...(makeVericationCodeNull && { verificationCode: null }),
       }
     );
 

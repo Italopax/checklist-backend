@@ -22,9 +22,11 @@ export enum Errors {
   USER_ALREADY_CREATED = "Usuário já existente.",
   USER_NOT_FOUND = "Usuário não encontrado.",
   USER_OR_PASSWORD_INVALID = "Usuário ou senha incorretos.",
+  USER_CANT_VALIDATE_EMAIL_ON_THIS_STATUS = "Usuário não pode validar seu email estando neste estatus.",
+  INCORRECT_CODE = "Código incorreto.",
   INVALID_DATA_FORMAT = "Formato incorreto das informações.",
   INVALID_PARAMS = "Parâmetros inválidos.",
-  INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido"
+  INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido."
 }
 
 export class BadRequest extends Error {

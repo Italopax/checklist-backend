@@ -27,11 +27,14 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.USER_ALREADY_CREATED);
     }
 
+    const randomCode = String(Math.floor(Math.random() * 1000000));
+
     const hashPassword = bcrypt.hashSync(userData.password, 10);
     const userDataToCreate = {
       ...userData,
       password: hashPassword,
       status: UserStatus.PENDING_VALIDATION,
+      verificationCode: randomCode,
     };
 
     const createdUser = await this.userRepository.create(userDataToCreate);
@@ -71,5 +74,26 @@ export class UserService implements IUserService {
     }
 
     return this.userRepository.updateUser(session.user.id as number, userData);
+  }
+
+  public validateEmail = async (session: Session, verificationCode: string): Promise<void> => {
+    const { user } = session;
+
+    if (user.status !== UserStatus.PENDING_VALIDATION) {
+      throw new BadRequest(Errors.USER_CANT_VALIDATE_EMAIL_ON_THIS_STATUS);
+    }
+
+    if (user.verificationCode !== verificationCode) {
+      throw new BadRequest(Errors.INCORRECT_CODE);
+    }
+
+    await this.userRepository.updateUser(
+      user.id as number,
+      {
+        status: UserStatus.ACTIVE,
+        verificationCode: '',
+      },
+      true
+    );
   }
 }
