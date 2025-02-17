@@ -69,7 +69,7 @@ export class InternalServerError extends Error {
   }
 }
 
-export const routeHandler = (handlerFunction: Handler) => {
+export const errorHandler = (handlerFunction: Handler) => {
   return (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(handlerFunction(req, res, next)).catch((error) =>
       next(error),
@@ -86,7 +86,7 @@ export const routeHandler = (handlerFunction: Handler) => {
 // };
   
 // manipulação dependendo do tipo de erro
-export const errorHandler = (
+export const errorManager = (
   error: BadRequest | Unauthorized | Forbidden | InternalServerError,
   req: Request,
   res: Response,

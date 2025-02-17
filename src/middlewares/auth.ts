@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { getEnv } from "../constants";
-import { Errors, routeHandler, Unauthorized } from "../utils/error";
+import { Errors, errorHandler, Unauthorized } from "../utils/error";
 import { User } from "../database/entities";
 import { AppDataSource } from "../database";
 
 const ConstantEnvs = getEnv();
 
-export const auth = routeHandler(async (request: Request, response: Response, next: NextFunction) => {
+export const auth = errorHandler(async (request: Request, response: Response, next: NextFunction) => {
   const { accessToken } = request.cookies;
 
   if (!accessToken) throw new Unauthorized(Errors.INVALID_PARAMS);

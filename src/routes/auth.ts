@@ -1,12 +1,12 @@
 import { Router } from "express";
 import Dependencies from "../dependencies";
-import { routeHandler } from "../utils/error";
+import { errorHandler } from "../utils/error";
 
 const router = Router();
 
 const { authController } = Dependencies.getInstance();
 
-router.post("/login", routeHandler(authController.login));
-router.post("/refreshToken", routeHandler(authController.refreshToken));
+router.post("/login", errorHandler(authController.login));
+router.post("/refreshToken", errorHandler(authController.refreshToken));
 
 export default router;

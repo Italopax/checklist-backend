@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { routeHandler } from "../utils/error";
+import { errorHandler } from "../utils/error";
 import Dependencies from "../dependencies";
 import { auth } from "../middlewares/auth";
 
@@ -7,9 +7,9 @@ const router: Router = Router();
 
 const { userController } = Dependencies.getInstance();
 
-router.post("/create", routeHandler(userController.create));
-router.get("/me", auth, routeHandler(userController.getMe));
-router.post("/verify-email", auth, routeHandler(userController.verifyEmailToken));
-router.put("/update", auth, routeHandler(userController.update));
+router.post("/create", errorHandler(userController.create));
+router.get("/me", auth, errorHandler(userController.getMe));
+router.post("/verify-email", auth, errorHandler(userController.verifyEmailToken));
+router.put("/update", auth, errorHandler(userController.update));
 
 export default router;

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { initializeEnvs } from "./constants";
-import { errorHandler } from "./utils/error";
+import { errorManager } from "./utils/error";
 import cookieParser from "cookie-parser";
 
 (async () => {
@@ -17,7 +17,7 @@ import cookieParser from "cookie-parser";
   const { router} = require("./routes");
 
   app.use(router);
-  app.use(errorHandler);
+  app.use(errorManager);
 
   AppDataSource.initialize()
     .then(() => {
