@@ -5,4 +5,5 @@ export interface IUserController {
   getMe(request: Request, response: Response): Promise<void>;
   verifyEmailToken(request: Request, response: Response): Promise<void>;
   update(request: Request, response: Response): Promise<void>;
+  resendVerificationCode(request: Request, response: Response): Promise<void>;
 }

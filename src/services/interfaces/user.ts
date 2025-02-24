@@ -6,4 +6,5 @@ export interface IUserService {
   getUser(session: Session): Promise<UserType>;
   updateUser(session: Session, userData: UserType): Promise<UserType | null>;
   validateEmail(session: Session, verificationCode: string): Promise<void>;
+  resendVerificationCode(session: Session): Promise<void>;
 }

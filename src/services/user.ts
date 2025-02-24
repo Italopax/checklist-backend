@@ -5,6 +5,7 @@ import { validateEmail } from "../utils";
 import { BadRequest, Errors } from "../utils/error";
 import { IUserService } from "./interfaces/user";
 import bcrypt from "bcrypt";
+import Email from "../utils/email";
 
 export class UserService implements IUserService {
   private readonly userRepository: IUserRepository;
@@ -28,6 +29,17 @@ export class UserService implements IUserService {
     }
 
     const randomCode = String(Math.floor(Math.random() * 1000000));
+
+    try {
+      await Email.sendEmail({
+        userEmail: userData.email,
+        title: "Email de verificação de criação de conta.",
+        text: `Seu código de verificação é: ${randomCode}`,
+      })
+    } catch (error) {
+      console.log("Erro ao enviar o email com código de verificação.");
+      throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
+    }
 
     const hashPassword = bcrypt.hashSync(userData.password, 10);
     const userDataToCreate = {
@@ -95,5 +107,26 @@ export class UserService implements IUserService {
       },
       true
     );
+  }
+
+  public resendVerificationCode = async (session: Session): Promise<void> => {
+    const { user } = session;
+ 
+    if (user.status !== UserStatus.PENDING_VALIDATION) {
+      throw new BadRequest(Errors.CANT_SEND_VERIFICATION_CODE_ON_THIS_STATUS);
+    }
+
+    const randomCode = String(Math.floor(Math.random() * 1000000));
+
+    try {
+      await Email.sendEmail({
+        userEmail: user.email,
+        title: "Email de verificação de criação de conta.",
+        text: `Seu código de verificação é: ${randomCode}`,
+      })
+    } catch (error) {
+      console.log("Erro ao enviar o email com código de verificação.");
+      throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
+    }
   }
 }

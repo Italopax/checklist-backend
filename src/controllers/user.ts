@@ -49,4 +49,9 @@ export class UserController implements IUserController{
     await this.userService.validateEmail(request.session, verificationCode);
     response.status(HttpStatus.NO_CONTENT).send();
   }
+
+  public resendVerificationCode = async (request: Request, response: Response): Promise<void> => {
+    await this.userService.resendVerificationCode(request.session);
+    response.status(HttpStatus.NO_CONTENT).send();
+  }
 }

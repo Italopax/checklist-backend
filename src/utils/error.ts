@@ -26,7 +26,9 @@ export enum Errors {
   INCORRECT_CODE = "Código incorreto.",
   INVALID_DATA_FORMAT = "Formato incorreto das informações.",
   INVALID_PARAMS = "Parâmetros inválidos.",
-  INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido."
+  INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido.",
+  EMAIL_SENDING_ERROR = "Erro ao enviar email.",
+  CANT_SEND_VERIFICATION_CODE_ON_THIS_STATUS = "Não é possível reenviar o código de verificação neste estatus.",
 }
 
 export class BadRequest extends Error {

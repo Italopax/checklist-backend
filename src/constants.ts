@@ -15,6 +15,11 @@ export class Constants {
     refreshTokenExpiration: number;
   }
 
+  email: {
+    emailSender: string;
+    emailSenderPassoword: string;
+  }
+
   constructor(props: { [key: string]: string }) {
     this.debbug = props.DEBBUG === 'true',
 
@@ -30,6 +35,11 @@ export class Constants {
       secretKey: props.JWT_SECRET,
       accessTokenExpiration: Number(props.ACCESS_TOKEN_EXPIRATION),
       refreshTokenExpiration: Number(props.REFRESH_TOKEN_EXPIRATION),
+    }
+
+    this.email = {
+      emailSender: props.EMAIL_SENDER,
+      emailSenderPassoword: props.EMAIL_SENDER_PASSWORD,
     }
   }
 }
