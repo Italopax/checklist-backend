@@ -1,3 +1,4 @@
+import { UserCreateInput, UserUpdateInput } from "../models/entitiesTypes";
 import { IUserService } from "../services/interfaces/user";
 import { HttpStatus } from "../utils/error";
 import { IUserController } from "./interfaces/user";
@@ -11,7 +12,7 @@ export class UserController implements IUserController{
   }
   
   public create = async (request: Request, response: Response): Promise<void> => {
-    const bodyInfos = {
+    const bodyInfos: UserCreateInput = {
       email: request.body.email,
       name: request.body.name,
       password: request.body.password,
@@ -31,7 +32,7 @@ export class UserController implements IUserController{
   }
 
   public update = async (request: Request, response: Response): Promise<void> => {
-    const bodyInfos = {
+    const bodyInfos: UserUpdateInput = {
       email: request.body.email,
       name: request.body.name,
       password: request.body.password,

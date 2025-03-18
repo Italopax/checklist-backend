@@ -1,9 +1,10 @@
-import { FindOneOptions, In, Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { AppDataSource } from "../database";
 import { User } from "../database/entities";
 import { IUserRepository } from "./interfaces/user";
-import { UserStatus, UserType } from "../models/types";
+import { UserStatus } from "../models/types";
 import { attributesSelector } from "../utils";
+import { UserType } from "../models/entitiesTypes";
 
 export class UserRepository implements IUserRepository {
   private readonly repository: Repository<User>;
@@ -49,7 +50,7 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public updateUser = async(id: number, userInfo: UserType, makeVericationCodeNull?: boolean): Promise<UserType | null> => {
+  public updateUser = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean): Promise<UserType | null> => {
     if (!id) return null;
 
     await this.repository.update(

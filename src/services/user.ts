@@ -1,4 +1,4 @@
-import { UserStatus, UserType } from "../models/types";
+import { UserStatus } from "../models/types";
 import { Session } from "../models/interfaces";
 import { IUserRepository } from "../repositories/interfaces/user";
 import { validateEmail } from "../utils";
@@ -6,6 +6,7 @@ import { BadRequest, Errors } from "../utils/error";
 import { IUserService } from "./interfaces/user";
 import bcrypt from "bcrypt";
 import Email from "../utils/email";
+import { UserCreateInput, UserType, UserUpdateInput } from "../models/entitiesTypes";
 
 export class UserService implements IUserService {
   private readonly userRepository: IUserRepository;
@@ -14,7 +15,7 @@ export class UserService implements IUserService {
     this.userRepository = userRepository;
   }
 
-  public createUser = async (userData: UserType): Promise<UserType> => {
+  public createUser = async (userData: UserCreateInput): Promise<UserType> => {
     if (
       !validateEmail(userData.email) ||
       !userData.name ||
@@ -67,7 +68,7 @@ export class UserService implements IUserService {
     return user;
   }
 
-  public updateUser = async (session: Session, userData: UserType): Promise<UserType | null> => {
+  public updateUser = async (session: Session, userData: UserUpdateInput): Promise<UserType | null> => {
     if (
       !validateEmail(userData.email) &&
       !userData.name &&

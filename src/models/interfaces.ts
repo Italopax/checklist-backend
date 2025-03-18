@@ -1,4 +1,4 @@
-import { UserType } from "./types";
+import { UserType } from "./entitiesTypes";
 
 export interface Session {
   user: UserType;
