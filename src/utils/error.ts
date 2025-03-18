@@ -29,6 +29,7 @@ export enum Errors {
   INTERNAL_SERVER_ERROR = "Ocorreu um erro desconhecido.",
   EMAIL_SENDING_ERROR = "Erro ao enviar email.",
   CANT_SEND_VERIFICATION_CODE_ON_THIS_STATUS = "Não é possível reenviar o código de verificação neste estatus.",
+  EMAIL_IN_USE = "Email já utilizado",
 }
 
 export class BadRequest extends Error {

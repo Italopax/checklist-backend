@@ -77,6 +77,11 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.INVALID_PARAMS);
     }
 
+    if (userData.email) {
+      const emailAlreadyUsed = await this.userRepository.selectValidAccountByEmail(userData.email);
+      if (emailAlreadyUsed) throw new BadRequest(Errors.EMAIL_IN_USE);
+    }
+
     if (userData.password) {
       const hashPassword = bcrypt.hashSync(userData.password, 10);
       userData.password = hashPassword;
