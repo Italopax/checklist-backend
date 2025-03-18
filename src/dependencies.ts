@@ -1,30 +1,44 @@
 import { AuthController } from "./controllers/auth";
-import { CategoryController } from "./controllers/category";
 import { IAuthController } from "./controllers/interfaces/auth";
+
+import { CategoryController } from "./controllers/category";
 import { ICategoryController } from "./controllers/interfaces/category";
-import { IItemController } from "./controllers/interfaces/item";
-import { IItemsGroupController } from "./controllers/interfaces/itemsGroup";
-import { IUserController } from "./controllers/interfaces/user";
+
 import { ItemController } from "./controllers/item";
+import { IItemController } from "./controllers/interfaces/item";
+
 import { ItemsGroupController } from "./controllers/itemsGroup";
+import { IItemsGroupController } from "./controllers/interfaces/itemsGroup";
+
 import { UserController } from "./controllers/user";
+import { IUserController } from "./controllers/interfaces/user";
+
 import { CategoryRepository } from "./repositories/category";
 import { ICategoryRepository } from "./repositories/interfaces/category";
-import { IItemRepository } from "./repositories/interfaces/item";
-import { IUserRepository } from "./repositories/interfaces/user";
+
 import { ItemRepository } from "./repositories/item";
-import { ItemsGroupRepository } from "./repositories/itemsGroup";
+import { IItemRepository } from "./repositories/interfaces/item";
+
 import { UserRepository } from "./repositories/user";
+import { IUserRepository } from "./repositories/interfaces/user";
+
+import { ItemsGroupRepository } from "./repositories/itemsGroup";
+import { IItemsGroupRepository } from "./repositories/interfaces/itemsGroup";
+
 import { AuthService } from "./services/auth";
-import { CategoryService } from "./services/category";
 import { IAuthService } from "./services/interfaces/auth";
+
+import { CategoryService } from "./services/category";
 import { ICategoryService } from "./services/interfaces/category";
-import { IItemService } from "./services/interfaces/item";
-import { IItemsGroupService } from "./services/interfaces/itemsGroup";
-import { IUserService } from "./services/interfaces/user";
-import { ItemService } from "./services/item";
-import { ItemsGroupService } from "./services/itemsGroup";
+
 import { UserService } from "./services/user";
+import { IUserService } from "./services/interfaces/user";
+
+import { ItemService } from "./services/item";
+import { IItemService } from "./services/interfaces/item";
+
+import { ItemsGroupService } from "./services/itemsGroup";
+import { IItemsGroupService } from "./services/interfaces/itemsGroup";
 
 interface IDependencies {
   userRepository: IUserRepository;
@@ -35,7 +49,7 @@ interface IDependencies {
   itemService: IItemService;
   itemController: IItemController;
 
-  itemsGroupRepository: ItemsGroupRepository;
+  itemsGroupRepository: IItemsGroupRepository;
   itemsGroupService: IItemsGroupService;
   itemsGroupController: IItemsGroupController;
 
