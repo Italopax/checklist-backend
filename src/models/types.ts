@@ -1,10 +1,10 @@
-type BaseEntityTpe = {
+type BaseEntityType = {
   id?: number;
   createdAt?: Date;
   deletedAt?: Date;
 }
 
-export type UserType = BaseEntityTpe & {
+export type UserType = BaseEntityType & {
   email?: string;
   name?: string;
   password?: string;
@@ -20,18 +20,18 @@ export enum UserStatus {
   INATIVE = 3,
 }
 
-export type CategoryType = BaseEntityTpe & {
+export type CategoryType = BaseEntityType & {
   name?: string;
   user?: UserType;
 }
 
-export type ItemType = BaseEntityTpe & {
+export type ItemType = BaseEntityType & {
   name?: string;
   isChecked?: boolean;
   itemsGroup?: ItemsGroupType;
 }
 
-export type ItemsGroupType = BaseEntityTpe & {
+export type ItemsGroupType = BaseEntityType & {
   name?: string;
   user?: UserType;
   items?: ItemType[];
