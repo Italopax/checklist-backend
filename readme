@@ -1,4 +1,4 @@
 ajustar importações para alias
 ajustar importações para utilizar os index das pastas
-envio e reenvio de email
 libs na inicialização (helmet)
+pool de conexoes no banco

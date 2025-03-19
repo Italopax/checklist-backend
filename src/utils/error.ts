@@ -19,6 +19,7 @@ export enum HttpStatus {
 }
 
 export enum Errors {
+  USER_UNAUTHORIZED = "Usuário não autorizado",
   USER_ALREADY_CREATED = "Usuário já existente.",
   USER_NOT_FOUND = "Usuário não encontrado.",
   USER_OR_PASSWORD_INVALID = "Usuário ou senha incorretos.",

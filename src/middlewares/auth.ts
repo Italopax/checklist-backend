@@ -10,7 +10,7 @@ const ConstantEnvs = getEnv();
 export const auth = errorHandler(async (request: Request, response: Response, next: NextFunction) => {
   const { accessToken } = request.cookies;
 
-  if (!accessToken) throw new Unauthorized(Errors.INVALID_PARAMS);
+  if (!accessToken) throw new Unauthorized(Errors.USER_UNAUTHORIZED);
 
   try {
     const payload = jwt.verify(accessToken, ConstantEnvs.jwt.secretKey) as jwt.JwtPayload;
@@ -27,6 +27,6 @@ export const auth = errorHandler(async (request: Request, response: Response, ne
 
     next();
   } catch (error) {
-    throw new Unauthorized(Errors.INVALID_PARAMS);
+    throw new Unauthorized(Errors.USER_UNAUTHORIZED);
   }
 });
