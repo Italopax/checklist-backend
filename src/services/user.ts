@@ -135,6 +135,6 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
     }
 
-    await this.userRepository.updateUser(user.id as number, { verificationCode: randomCode });
+    await this.userRepository.updateUser(user.id, { verificationCode: randomCode });
   }
 }

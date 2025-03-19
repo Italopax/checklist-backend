@@ -1,7 +1,7 @@
 import { UserType } from "./entitiesTypes";
 
 export interface Session {
-  user: UserType;
+  user: Required<UserType>;
 };
 
 export interface CookieObjectData {
