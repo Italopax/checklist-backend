@@ -60,7 +60,6 @@ export class UserService implements IUserService {
     }
 
     const user = await this.userRepository.selectById(session.user.id, { password: true, verificationCode: true });
-    console.log(user);
 
     if (!user) {
       throw new BadRequest(Errors.USER_NOT_FOUND);

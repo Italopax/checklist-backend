@@ -73,7 +73,6 @@ export class AuthService implements IAuthService {
 
     const tokenPayload = this.decodeToken(refreshToken);
     const user = await this.userRepository.selectById(tokenPayload.userId);
-    console.log(user);
     if (!user) throw new BadRequest(Errors.USER_NOT_FOUND);
 
     const accessToken = this.generateToken({ userId: user.id }, ConstantEnvs.jwt.accessTokenExpiration);
