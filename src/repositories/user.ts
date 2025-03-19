@@ -5,6 +5,7 @@ import { IUserRepository } from "./interfaces/user";
 import { UserStatus } from "../models/enums";
 import { attributesSelector } from "../utils";
 import { UserType } from "../models/entitiesTypes";
+import { SensitiveColumns } from "../models/types";
 
 export class UserRepository implements IUserRepository {
   private readonly repository: Repository<User>;
@@ -37,10 +38,14 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public selectById = async(userId: number, selectPassword?: boolean): Promise<UserType | null> => {
+  public selectById = async(userId: number, removeSensitiveColumns?: { [key: string]: boolean }): Promise<UserType | null> => {
     if (!userId) return null;
 
-    const columnsToRemove: string[] = selectPassword ? [] : ['password'];
+    const columnsToRemove: string[] = [];
+    
+    for (const key in removeSensitiveColumns) {
+      if (removeSensitiveColumns[key]) columnsToRemove.push(key); 
+    }
 
     return this.repository.findOne({
       where: {
@@ -67,6 +72,6 @@ export class UserRepository implements IUserRepository {
       }
     );
 
-    return this.selectById(id);
+    return this.selectById(id, { password: true, verificationCode: true });
   }
 }

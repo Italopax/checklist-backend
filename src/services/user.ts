@@ -59,7 +59,8 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.USER_NOT_FOUND);
     }
 
-    const user = await this.userRepository.selectById(session.user.id);
+    const user = await this.userRepository.selectById(session.user.id, { password: true, verificationCode: true });
+    console.log(user);
 
     if (!user) {
       throw new BadRequest(Errors.USER_NOT_FOUND);
