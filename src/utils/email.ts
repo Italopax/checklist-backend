@@ -14,13 +14,18 @@ export default class Email {
     title: string;
     text: string;
   }): Promise<void> {
-    const email = ConstantEnvs.email.emailSender;
-    const emailPassword = ConstantEnvs.email.emailSenderPassoword;
+    const email = ConstantEnvs.email.user;
+    const emailPassword = ConstantEnvs.email.password;
+    const host = ConstantEnvs.email.host;
+    const port = ConstantEnvs.email.port;
+    const secure = ConstantEnvs.email.secure;
 
     if (!email || !emailPassword) throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host,
+      port,
+      secure,
       auth: {
         user: email,
         pass: emailPassword,

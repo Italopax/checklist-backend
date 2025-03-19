@@ -16,8 +16,11 @@ export class Constants {
   }
 
   email: {
-    emailSender: string;
-    emailSenderPassoword: string;
+    user: string;
+    password: string;
+    host: string;
+    port: number;
+    secure: boolean;
   }
 
   constructor(props: { [key: string]: string }) {
@@ -38,8 +41,11 @@ export class Constants {
     }
 
     this.email = {
-      emailSender: props.EMAIL_SENDER,
-      emailSenderPassoword: props.EMAIL_SENDER_PASSWORD,
+      user: props.EMAIL_SENDER,
+      password: props.EMAIL_SENDER_PASSWORD,
+      host: props.EMAIL_SENDER_HOST,
+      port: Number(props.EMAIL_SENDER_PORT),
+      secure: Boolean(props.EMAIL_SENDER_SECURE),
     }
   }
 }
