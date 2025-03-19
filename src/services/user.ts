@@ -134,5 +134,7 @@ export class UserService implements IUserService {
       console.log("Erro ao enviar o email com código de verificação.");
       throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
     }
+
+    await this.userRepository.updateUser(user.id as number, { verificationCode: randomCode });
   }
 }
