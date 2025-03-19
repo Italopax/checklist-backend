@@ -1,4 +1,4 @@
-import { UserStatus } from "../models/types";
+import { UserStatus } from "../models/enums";
 import { Session } from "../models/interfaces";
 import { IUserRepository } from "../repositories/interfaces/user";
 import { validateEmail } from "../utils";

@@ -1,4 +1,4 @@
-import { UserStatus } from "./types";
+import { UserStatus } from "./enums";
 
 type BaseEntityType = {
   id?: number;

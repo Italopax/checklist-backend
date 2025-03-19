@@ -2,7 +2,7 @@ import { In, Repository } from "typeorm";
 import { AppDataSource } from "../database";
 import { User } from "../database/entities";
 import { IUserRepository } from "./interfaces/user";
-import { UserStatus } from "../models/types";
+import { UserStatus } from "../models/enums";
 import { attributesSelector } from "../utils";
 import { UserType } from "../models/entitiesTypes";
 
