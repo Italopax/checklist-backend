@@ -55,7 +55,7 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public updateUser = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean): Promise<UserType | null> => {
+  public update = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean): Promise<UserType | null> => {
     if (!id) return null;
 
     await this.repository.update(

@@ -91,7 +91,7 @@ export class UserService implements IUserService {
       userData.status = UserStatus.PENDING_VALIDATION;
     }
 
-    return this.userRepository.updateUser(session.user.id as number, userData);
+    return this.userRepository.update(session.user.id as number, userData);
   }
 
   public validateEmail = async (session: Session, verificationCode: string): Promise<void> => {
@@ -105,7 +105,7 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.INCORRECT_CODE);
     }
 
-    await this.userRepository.updateUser(
+    await this.userRepository.update(
       user.id as number,
       {
         status: UserStatus.ACTIVE,
@@ -135,6 +135,6 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
     }
 
-    await this.userRepository.updateUser(user.id, { verificationCode: randomCode });
+    await this.userRepository.update(user.id, { verificationCode: randomCode });
   }
 }
