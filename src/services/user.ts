@@ -91,7 +91,7 @@ export class UserService implements IUserService {
       userData.status = UserStatus.PENDING_VALIDATION;
     }
 
-    return this.userRepository.update(session.user.id as number, userData);
+    return this.userRepository.update(session.user.id, userData);
   }
 
   public validateEmail = async (session: Session, verificationCode: string): Promise<void> => {
