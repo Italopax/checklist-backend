@@ -31,6 +31,8 @@ export enum Errors {
   EMAIL_SENDING_ERROR = "Erro ao enviar email.",
   CANT_SEND_VERIFICATION_CODE_ON_THIS_STATUS = "Não é possível reenviar o código de verificação neste estatus.",
   EMAIL_IN_USE = "Email já utilizado",
+  ITEMS_GROUP_WITH_THIS_NAME_ALREADY_EXIST = "Nome de grupo de itens já utilizado.",
+  ITEMS_GROUP_NOT_FOUND = "Grupo de itens não encontrado.",
 }
 
 export class BadRequest extends Error {

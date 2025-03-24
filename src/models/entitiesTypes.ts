@@ -21,12 +21,16 @@ export type UserType = BaseEntityType & {
 export type UserCreateInput = Required<Pick<UserType, 'email' | 'name' | 'password'>>;
 export type UserUpdateInput = Partial<Pick<UserType, 'email' | 'name' | 'password' | 'status'>>;
 
-// CATEGORY TYPES
+// ITEM GROUP TYPES
 
-export type CategoryType = BaseEntityType & {
-  name?: string;
-  user?: UserType;
+export type ItemsGroupType = BaseEntityType & {
+  name: string;
+  userId: number;
+  items?: ItemType[];
 }
+
+export type ItemsGroupCreateInput = Required<Pick<ItemsGroupType, 'name' | 'userId'>>;
+export type ItemsGroupUpdateInput = Pick<ItemsGroupType, 'name'>;
 
 // ITEM TYPES
 
@@ -36,10 +40,9 @@ export type ItemType = BaseEntityType & {
   itemsGroup?: ItemsGroupType;
 }
 
-// ITEM GROUP TYPES
+// CATEGORY TYPES
 
-export type ItemsGroupType = BaseEntityType & {
+export type CategoryType = BaseEntityType & {
   name?: string;
   user?: UserType;
-  items?: ItemType[];
 }
