@@ -9,7 +9,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "typeRoots" : ["./src/@types", "./node_modules/@types"]
+    "typeRoots" : ["./src/@types", "./node_modules/@types"],
+    "strictNullChecks": false
   },
   "include": ["src"],
   "exclude": ["node_modules"]
