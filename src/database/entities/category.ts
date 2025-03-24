@@ -7,6 +7,9 @@ export class Category extends EntityBase {
   @Column()
   name: string;
 
+  @Column()
+  userId: number;
+
   @ManyToOne(() => User, (user) => user.categories)
   user: User;
 }

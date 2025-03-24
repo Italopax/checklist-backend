@@ -8,6 +8,9 @@ export class Item extends EntityBase {
 
   @Column()
   isChecked: boolean;
+
+  @Column()
+  itemsGroupId: number;
   
   @ManyToOne(() => ItemsGroup, (itemsGroup) => itemsGroup.items)
   itemsGroup: ItemsGroup;

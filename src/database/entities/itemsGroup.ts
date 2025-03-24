@@ -9,6 +9,9 @@ export class ItemsGroup extends EntityBase {
   @ManyToOne(() => User, (user) => user.itemsGroups)
   user: User;
 
+  @Column()
+  userId: number;
+
   @OneToMany(() => Item, (item) => item.itemsGroup)
   items: Item[];
 }
