@@ -68,7 +68,7 @@ export class UserService implements IUserService {
     return user;
   }
 
-  public updateUser = async (session: Session, userData: UserUpdateInput): Promise<UserType | null> => {
+  public updateUser = async (session: Session, userData: UserUpdateInput): Promise<UserType> => {
     if (
       !validateEmail(userData.email) &&
       !userData.name &&

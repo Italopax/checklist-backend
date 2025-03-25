@@ -24,7 +24,7 @@ export class UserRepository implements IUserRepository {
     };
   }
 
-  public selectValidAccountByEmail = async(email: string, selectPassword?: boolean): Promise<UserType | null> => {
+  public selectValidAccountByEmail = async(email: string, selectPassword?: boolean): Promise<UserType> => {
     if (!email) return null;
 
     const columnsToRemove: string[] = selectPassword ? [] : ['password'];
@@ -38,7 +38,7 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public selectById = async(userId: number, removeSensitiveColumns?: { [key: string]: boolean }): Promise<UserType | null> => {
+  public selectById = async(userId: number, removeSensitiveColumns?: { [key: string]: boolean }): Promise<UserType> => {
     if (!userId) return null;
 
     const columnsToRemove: string[] = [];
@@ -55,7 +55,7 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public update = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean): Promise<UserType | null> => {
+  public update = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean): Promise<UserType> => {
     if (!id) return null;
 
     await this.repository.update(

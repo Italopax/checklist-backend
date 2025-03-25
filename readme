@@ -1,16 +1,17 @@
 FEATURES
   libs na inicialização (helmet)
   rota de apagar/desabilita user
-  rota de apagar/desabilita items group
   middleware de validação de status da conta
 
 MELHORIAS
   ajustar importações para alias
   ajustar importações para utilizar os index das pastas
   pool de conexoes no banco
-  remover os "| null" das tipagens
   melhorar as classes de entidades
     valores default
     atributos publicos
     etc
   relação das tabelas cagegoria e itemsgroup
+
+Docker compose
+Serviços da AWS

@@ -4,7 +4,7 @@ import { Session } from "../../models/interfaces";
 export interface IUserService {
   createUser(userData: UserCreateInput): Promise<UserType>;
   getUser(session: Session): Promise<UserType>;
-  updateUser(session: Session, userData: UserUpdateInput): Promise<UserType | null>;
+  updateUser(session: Session, userData: UserUpdateInput): Promise<UserType>;
   validateEmail(session: Session, verificationCode: string): Promise<void>;
   resendVerificationCode(session: Session): Promise<void>;
 }
