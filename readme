@@ -12,6 +12,10 @@ MELHORIAS
     atributos publicos
     etc
   relação das tabelas cagegoria e itemsgroup
+  lint e prettier
+  alterar o tipo dos ids (number -> uuid)
+  utilizar função soft delete nativo do typeorm
+  verificar se os services validam se recebem os parametros corretamente
 
 Docker compose
 Serviços da AWS
