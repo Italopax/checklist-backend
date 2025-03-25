@@ -2,6 +2,7 @@ FEATURES
   libs na inicialização (helmet)
   rota de apagar/desabilita user
   middleware de validação de status da conta
+  testes
 
 MELHORIAS
   ajustar importações para alias
@@ -16,6 +17,8 @@ MELHORIAS
   alterar o tipo dos ids (number -> uuid)
   utilizar função soft delete nativo do typeorm
   verificar se os services validam se recebem os parametros corretamente
+  padronizar a passagem de id (seja pelo body ou parametro na requisição)
+    - exemplo: controller de item
 
 Docker compose
 Serviços da AWS
