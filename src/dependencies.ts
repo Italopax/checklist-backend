@@ -85,22 +85,20 @@ class Dependencies implements IDependencies {
 
   constructor() {
     this.userRepository = new UserRepository();
-    this.userService = new UserService(this.userRepository);
-    this.userController = new UserController(this.userService);
-
     this.itemRepository = new ItemRepository();
-    this.itemService = new ItemService(this.itemRepository);
-    this.itemController = new ItemController(this.itemService);
-
     this.itemsGroupRepository = new ItemsGroupRepository();
-    this.itemsGroupService = new ItemsGroupService(this.itemsGroupRepository);
-    this.itemsGroupController = new ItemsGroupController(this.itemsGroupService);
-
     this.catetoryRepository = new CategoryRepository();
+
+    this.userService = new UserService(this.userRepository);
+    this.itemService = new ItemService(this.itemRepository, this.itemsGroupRepository);
+    this.itemsGroupService = new ItemsGroupService(this.itemsGroupRepository);
     this.categoryService = new CategoryService(this.catetoryRepository);
-    this.categoryController = new CategoryController(this.categoryService);
-    
     this.authService = new AuthService(this.userRepository);
+
+    this.userController = new UserController(this.userService);
+    this.itemController = new ItemController(this.itemService);
+    this.itemsGroupController = new ItemsGroupController(this.itemsGroupService);
+    this.categoryController = new CategoryController(this.categoryService);
     this.authController = new AuthController(this.authService);
   }
 

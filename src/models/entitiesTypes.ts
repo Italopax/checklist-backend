@@ -27,6 +27,7 @@ export type ItemsGroupType = BaseEntityType & {
   name: string;
   userId: number;
   items?: ItemType[];
+  user?: UserType;
 }
 
 export type ItemsGroupCreateInput = Required<Pick<ItemsGroupType, 'name' | 'userId'>>;
@@ -35,10 +36,14 @@ export type ItemsGroupUpdateInput = Pick<ItemsGroupType, 'name'>;
 // ITEM TYPES
 
 export type ItemType = BaseEntityType & {
-  name?: string;
-  isChecked?: boolean;
+  name: string;
+  isChecked: boolean;
+  itemsGroupId: number;
   itemsGroup?: ItemsGroupType;
 }
+
+export type ItemCreateInput = Required<Pick<ItemType, 'name' | 'itemsGroupId'>>;
+export type ItemUpdateInput = Pick<ItemType, 'name'>;
 
 // CATEGORY TYPES
 

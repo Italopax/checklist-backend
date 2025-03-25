@@ -6,7 +6,7 @@ export class Item extends EntityBase {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ default: false })
   isChecked: boolean;
 
   @Column()

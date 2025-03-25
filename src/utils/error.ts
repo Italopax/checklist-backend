@@ -33,6 +33,8 @@ export enum Errors {
   EMAIL_IN_USE = "Email já utilizado",
   ITEMS_GROUP_WITH_THIS_NAME_ALREADY_EXIST = "Nome de grupo de itens já utilizado.",
   ITEMS_GROUP_NOT_FOUND = "Grupo de itens não encontrado.",
+  ITEM_WITH_THIS_NAME_ALREADY_CREATED = "Item com mesmo nome já criado.",
+  ITEM_NOT_FOUND = "Item não encontrado",
 }
 
 export class BadRequest extends Error {
