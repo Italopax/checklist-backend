@@ -3,13 +3,15 @@ import express from "express";
 import { initializeEnvs } from "./constants";
 import { errorManager } from "./utils/error";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 (async () => {
   const app = express();
-  const port = 3000;
+  const port = 3030;
   
   app.use(cookieParser());
   app.use(express.json());
+  app.use(cors());
   
   await initializeEnvs({ ...process.env });
 
