@@ -11,7 +11,7 @@ export class AuthController implements IAuthController {
     this.authService = AuthService;
   }
 
-  public login = async (request: Request, response: Response): Promise<void> => {
+  public loginWithCookies = async (request: Request, response: Response): Promise<void> => {
     const userCredentials: LoginCredentials = {
       email: request.body.login,
       password: request.body.password,
@@ -34,9 +34,9 @@ export class AuthController implements IAuthController {
     response.status(HttpStatus.NO_CONTENT).send();
   }
 
-  public refreshToken = async (request: Request, response: Response): Promise<void> => {
+  public refreshTokenWithCookies = async (request: Request, response: Response): Promise<void> => {
     const { refreshToken } = request.cookies;
-
+    
     const accessTokenCookieValues = await this.authService.getNewAccesTokenData(refreshToken);
 
     response.cookie(
@@ -46,5 +46,30 @@ export class AuthController implements IAuthController {
     );
 
     response.status(HttpStatus.NO_CONTENT).send();
+  }
+
+  public login = async (request: Request, response: Response): Promise<void> => {
+    const userCredentials: LoginCredentials = {
+      email: request.body.login,
+      password: request.body.password,
+    };
+
+    const data = await this.authService.getAccessTokens(userCredentials);
+
+    response.status(HttpStatus.NO_CONTENT).send({
+      data,
+    });
+  }
+
+  public refreshToken = async (request: Request, response: Response): Promise<void> => {
+    const { refreshToken } = request.cookies;
+    
+    const { accessToken } = await this.authService.refreshAccessToken(refreshToken);
+
+    response.status(HttpStatus.NO_CONTENT).send({
+      data: {
+        accessToken,
+      }
+    });
   }
 }

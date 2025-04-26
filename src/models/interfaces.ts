@@ -19,6 +19,11 @@ export interface LoginCookiesData {
   refreshTokenCookieValues: CookieObjectData
 }
 
+export interface LoginAcessTokens {
+  accessToken: string,
+  refreshToken: string,
+}
+
 export type LoginCredentials = {
   email: string;
   password: string;
