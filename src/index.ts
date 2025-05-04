@@ -11,7 +11,14 @@ import cors from "cors";
   
   app.use(cookieParser());
   app.use(express.json());
-  app.use(cors());
+
+  app.use(cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+  }));
   
   await initializeEnvs({ ...process.env });
 
