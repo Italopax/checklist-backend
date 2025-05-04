@@ -56,7 +56,7 @@ export class AuthController implements IAuthController {
 
     const data = await this.authService.getAccessTokens(userCredentials);
 
-    response.status(HttpStatus.NO_CONTENT).send({
+    response.status(HttpStatus.OK).send({
       data,
     });
   }
@@ -66,7 +66,7 @@ export class AuthController implements IAuthController {
     
     const { accessToken } = await this.authService.refreshAccessToken(refreshToken);
 
-    response.status(HttpStatus.NO_CONTENT).send({
+    response.status(HttpStatus.OK).send({
       data: {
         accessToken,
       }
