@@ -35,7 +35,6 @@ export class UserController implements IUserController{
     const bodyInfos: UserUpdateInput = {
       email: request.body.email,
       name: request.body.name,
-      password: request.body.password,
     };
 
     const user = await this.userService.updateUser(request.session, bodyInfos);
