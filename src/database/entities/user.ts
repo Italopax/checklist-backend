@@ -3,7 +3,7 @@ import { EntityBase, Category, ItemsGroup } from "./index";
 
 @Entity()
 export class User extends EntityBase {
-  @Column({ unique: true })
+  @Column()
   email: string;
   
   @Column()
