@@ -24,7 +24,7 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.INVALID_PARAMS);
     }
 
-    const userExist = await this.userRepository.selectValidAccountByEmail(userData.email as string);
+    const userExist = await this.userRepository.selectValidUserByEmail(userData.email as string);
     if (userExist) {
       throw new BadRequest(Errors.USER_ALREADY_CREATED);
     }
@@ -73,7 +73,7 @@ export class UserService implements IUserService {
 
     const isDifferentEmail = email !== user.email;
     if (isDifferentEmail) {
-      const emailAlreadyUsed = await this.userRepository.selectValidAccountByEmail(email);
+      const emailAlreadyUsed = await this.userRepository.selectValidUserByEmail(email);
       if (emailAlreadyUsed) throw new BadRequest(Errors.EMAIL_IN_USE);
 
       const randomCode = String(Math.floor(Math.random() * 1000000));

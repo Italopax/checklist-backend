@@ -24,7 +24,7 @@ export class UserRepository implements IUserRepository {
     };
   }
 
-  public selectValidAccountByEmail = async(email: string, selectPassword?: boolean): Promise<UserType> => {
+  public selectValidUserByEmail = async(email: string, selectPassword?: boolean): Promise<UserType> => {
     if (!email) return null;
 
     const columnsToRemove: string[] = selectPassword ? [] : ['password'];

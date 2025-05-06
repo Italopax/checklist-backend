@@ -50,7 +50,7 @@ export class AuthService implements IAuthService {
   public generateLoginCookiesData = async ({ email, password }: LoginCredentials): Promise<LoginCookiesData> => {
     if (!email || !password) throw new BadRequest(Errors.INVALID_PARAMS);
 
-    const userExist = await this.userRepository.selectValidAccountByEmail(email, true);
+    const userExist = await this.userRepository.selectValidUserByEmail(email, true);
     if (!userExist) throw new BadRequest(Errors.USER_NOT_FOUND);
 
     const passwordIsCorrect = await bcrypt.compare(password, userExist.password as string);
@@ -84,7 +84,7 @@ export class AuthService implements IAuthService {
   public getAccessTokens = async ({ email, password }: LoginCredentials): Promise<LoginAcessTokens> => {
     if (!email || !password) throw new BadRequest(Errors.INVALID_PARAMS);
 
-    const userExist = await this.userRepository.selectValidAccountByEmail(email, true);
+    const userExist = await this.userRepository.selectValidUserByEmail(email, true);
     if (!userExist) throw new BadRequest(Errors.USER_NOT_FOUND);
 
     const passwordIsCorrect = await bcrypt.compare(password, userExist.password as string);
