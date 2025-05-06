@@ -1,4 +1,5 @@
 import { UserCreateInput, UserUpdateInput } from "../models/entitiesTypes";
+import { ChangePasswordDTO } from "../models/interfaces";
 import { IUserService } from "../services/interfaces/user";
 import { HttpStatus } from "../utils/error";
 import { IUserController } from "./interfaces/user";
@@ -41,6 +42,16 @@ export class UserController implements IUserController{
     response.status(HttpStatus.OK).send({
       data: user,
     });
+  }
+
+  public changePassword = async (request: Request, response: Response): Promise<void> => {
+    const userPasswords: ChangePasswordDTO = {
+      actualPassword: request.body.actualPassword,
+      newPassword: request.body.newPassword,
+    };
+
+    await this.userService.updateUserPassword(request.session, userPasswords);
+    response.status(HttpStatus.NO_CONTENT).send();
   }
 
   public verifyEmailToken = async (request: Request, response: Response): Promise<void> => {

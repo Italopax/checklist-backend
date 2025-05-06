@@ -28,3 +28,8 @@ export type LoginCredentials = {
   email: string;
   password: string;
 }
+
+export interface ChangePasswordDTO {
+  actualPassword: string;
+  newPassword: string;
+}

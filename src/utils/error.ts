@@ -23,6 +23,7 @@ export enum Errors {
   USER_ALREADY_CREATED = "Usuário já existente.",
   USER_NOT_FOUND = "Usuário não encontrado.",
   USER_OR_PASSWORD_INVALID = "Usuário ou senha incorretos.",
+  INVALID_PASSWORD = "Senha incorreta.",
   USER_CANT_VALIDATE_EMAIL_ON_THIS_STATUS = "Usuário não pode validar seu email estando neste estatus.",
   INCORRECT_CODE = "Código incorreto.",
   INVALID_DATA_FORMAT = "Formato incorreto das informações.",

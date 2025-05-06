@@ -1,5 +1,5 @@
 import { UserStatus } from "../models/enums";
-import { Session } from "../models/interfaces";
+import { ChangePasswordDTO, Session } from "../models/interfaces";
 import { IUserRepository } from "../repositories/interfaces/user";
 import { validateEmail } from "../utils";
 import { BadRequest, Errors } from "../utils/error";
@@ -88,6 +88,20 @@ export class UserService implements IUserService {
     return this.userRepository.update(session.user.id, userData);
   }
 
+  public updateUserPassword = async (session: Session, passwords: ChangePasswordDTO): Promise<void> => {
+    const { actualPassword, newPassword } = passwords;
+
+    if (!actualPassword || !newPassword) throw new BadRequest(Errors.INVALID_PARAMS);
+
+    const passwordIsCorrect = await this.validateUserPassword(session.user, actualPassword);
+    if (!passwordIsCorrect) throw new BadRequest(Errors.INVALID_PASSWORD);
+    
+    const newPasswordEncrypted = bcrypt.hashSync(newPassword, 10);
+    await this.userRepository.update(session.user.id, {
+      password: newPasswordEncrypted,
+    });
+  }
+
   public validateEmail = async (session: Session, verificationCode: string): Promise<void> => {
     const { user } = session;
 
@@ -130,5 +144,12 @@ export class UserService implements IUserService {
     }
 
     await this.userRepository.update(user.id, { verificationCode: randomCode });
+  }
+
+  private validateUserPassword = async (user: UserType, password: string): Promise<boolean> => {
+    if (!user || !password) throw new BadRequest(Errors.INVALID_PARAMS);
+
+    const passwordIsCorrect = await bcrypt.compare(password, user.password as string);
+    return passwordIsCorrect;
   }
 }
