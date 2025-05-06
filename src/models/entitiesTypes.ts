@@ -19,7 +19,7 @@ export type UserType = BaseEntityType & {
 }
 
 export type UserCreateInput = Required<Pick<UserType, 'email' | 'name' | 'password'>>;
-export type UserUpdateInput = Partial<Pick<UserType, 'email' | 'name' | 'password' | 'status'>>;
+export type UserUpdateInput = Partial<Pick<UserType, 'email' | 'name' | 'password' | 'status' | 'verificationCode'>>;
 
 // ITEM GROUP TYPES
 
