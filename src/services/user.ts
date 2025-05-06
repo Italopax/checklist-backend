@@ -85,10 +85,12 @@ export class UserService implements IUserService {
     if (isDifferentEmail) {
       const emailAlreadyUsed = await this.userRepository.selectValidAccountByEmail(email);
       if (emailAlreadyUsed) throw new BadRequest(Errors.EMAIL_IN_USE);
-    }
 
-    if (email !== session.user.email) {
+      const randomCode = String(Math.floor(Math.random() * 1000000));
+      await this.sendVerificationCodeToEmail(email, randomCode);
+
       userData.status = UserStatus.PENDING_VALIDATION;
+      userData.verificationCode = randomCode;
     }
 
     return this.userRepository.update(session.user.id, userData);
@@ -157,5 +159,18 @@ export class UserService implements IUserService {
 
     const passwordIsCorrect = await bcrypt.compare(password, user.password as string);
     return passwordIsCorrect;
+  }
+
+  private sendVerificationCodeToEmail = async (email: string, randomCode: string): Promise<void> => {
+    try {
+      await Email.sendEmail({
+        userEmail: email,
+        title: "Email de verificação de criação de conta.",
+        text: `Seu código de verificação é: ${randomCode}`,
+      })
+    } catch (error) {
+      console.log("Erro ao enviar o email com código de verificação.");
+      throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
+    }
   }
 }
