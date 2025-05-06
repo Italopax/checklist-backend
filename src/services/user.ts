@@ -69,19 +69,25 @@ export class UserService implements IUserService {
   }
 
   public updateUser = async (session: Session, userData: UserUpdateInput): Promise<UserType> => {
-    if (
-      !validateEmail(userData.email) &&
-      !userData.name
-    ) {
+    const { user } = session;
+    const { email, name } = userData;
+
+    const isSameUserData = user.name === name && user.email === email;
+    if (isSameUserData) {
+      return user;
+    }
+
+    if (!validateEmail(email) && !name) {
       throw new BadRequest(Errors.INVALID_PARAMS);
     }
 
-    if (userData.email) {
-      const emailAlreadyUsed = await this.userRepository.selectValidAccountByEmail(userData.email);
+    const isDifferentEmail = email !== user.email;
+    if (isDifferentEmail) {
+      const emailAlreadyUsed = await this.userRepository.selectValidAccountByEmail(email);
       if (emailAlreadyUsed) throw new BadRequest(Errors.EMAIL_IN_USE);
     }
 
-    if (userData.email !== session.user.email) {
+    if (email !== session.user.email) {
       userData.status = UserStatus.PENDING_VALIDATION;
     }
 
