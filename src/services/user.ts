@@ -30,17 +30,7 @@ export class UserService implements IUserService {
     }
 
     const randomCode = String(Math.floor(Math.random() * 1000000));
-
-    try {
-      await Email.sendEmail({
-        userEmail: userData.email,
-        title: "Email de verificação de criação de conta.",
-        text: `Seu código de verificação é: ${randomCode}`,
-      })
-    } catch (error) {
-      console.log("Erro ao enviar o email com código de verificação.");
-      throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
-    }
+    await this.sendVerificationCodeToEmail(userData.email, randomCode);
 
     const hashPassword = bcrypt.hashSync(userData.password, 10);
     const userDataToCreate = {
