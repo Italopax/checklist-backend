@@ -71,7 +71,7 @@ export class UserService implements IUserService {
       throw new BadRequest(Errors.INVALID_PARAMS);
     }
 
-    const isDifferentEmail = email !== user.email;
+    const isDifferentEmail = email && email !== user.email;
     if (isDifferentEmail) {
       const emailAlreadyUsed = await this.userRepository.selectValidUserByEmail(email);
       if (emailAlreadyUsed) throw new BadRequest(Errors.EMAIL_IN_USE);
