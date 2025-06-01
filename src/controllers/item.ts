@@ -23,6 +23,7 @@ export class ItemController implements IItemController {
   public update = async (request: Request, response: Response): Promise<void> => {
     const itemInfosToUpdate: ItemUpdateInput = {
       name: request.body.name,
+      isChecked: request.body.isChecked,
     }
 
     const id: number = Number(request.params.id);

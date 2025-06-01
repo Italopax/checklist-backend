@@ -42,15 +42,23 @@ export class ItemService implements IItemService {
   }
 
   public updateItem = async (session: Session, itemId: number, itemInfos: ItemUpdateInput): Promise<ItemType> => {
-    if (!itemInfos.name || !itemId) throw new BadRequest(Errors.INVALID_PARAMS);
+    const { name, isChecked } = itemInfos;
+    const hasAnyParamToUpdate = name || (isChecked || isChecked === false);
+
+    if (!itemId || !hasAnyParamToUpdate) throw new BadRequest(Errors.INVALID_PARAMS);
 
     const itemToUpdate = await this.itemRepository.selectByIdWithItemsGroupAndUser(itemId);
     if (!itemToUpdate || itemToUpdate.itemsGroup.user.id !== session.user.id) throw new BadRequest(Errors.ITEM_NOT_FOUND);
 
-    const itemWhithThisNameAlreadyExist = await this.itemRepository.selectByName(itemToUpdate.itemsGroupId, itemInfos.name);
-    if (itemWhithThisNameAlreadyExist) throw new BadRequest(Errors.ITEM_WITH_THIS_NAME_ALREADY_CREATED);
+    if (name) {
+      const itemWhithThisNameAlreadyExist = await this.itemRepository.selectByName(itemToUpdate.itemsGroupId, name);
+      if (itemWhithThisNameAlreadyExist) throw new BadRequest(Errors.ITEM_WITH_THIS_NAME_ALREADY_CREATED);
+    }
 
-    return this.itemRepository.update(itemToUpdate.id, { name: itemInfos.name});
+    return this.itemRepository.update(itemToUpdate.id, {
+      ...(name && { name: name }),
+      ...((isChecked || isChecked === false) && { isChecked: isChecked }),
+    });
   }
 
   public deleteItem = async (session: Session, itemId: number): Promise<void> => {

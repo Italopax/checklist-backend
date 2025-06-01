@@ -56,6 +56,7 @@ export class ItemRepository implements IItemRepository {
       { id },
       {
         ...(itemInfos.name && { name: itemInfos.name }),
+        ...((itemInfos.isChecked || itemInfos.isChecked === false) && { isChecked: itemInfos.isChecked }),
       }
     );
 
