@@ -51,7 +51,7 @@ export class AuthService implements IAuthService {
     if (!email || !password) throw new BadRequest(Errors.INVALID_PARAMS);
 
     const userExist = await this.userRepository.selectValidUserByEmail(email, true);
-    if (!userExist) throw new BadRequest(Errors.USER_NOT_FOUND);
+    if (!userExist) throw new BadRequest(Errors.USER_OR_PASSWORD_INVALID);
 
     const passwordIsCorrect = await bcrypt.compare(password, userExist.password as string);
     if (!passwordIsCorrect) throw new Unauthorized(Errors.USER_OR_PASSWORD_INVALID);
@@ -85,7 +85,7 @@ export class AuthService implements IAuthService {
     if (!email || !password) throw new BadRequest(Errors.INVALID_PARAMS);
 
     const userExist = await this.userRepository.selectValidUserByEmail(email, true);
-    if (!userExist) throw new BadRequest(Errors.USER_NOT_FOUND);
+    if (!userExist) throw new BadRequest(Errors.USER_OR_PASSWORD_INVALID);
 
     const passwordIsCorrect = await bcrypt.compare(password, userExist.password as string);
     if (!passwordIsCorrect) throw new Unauthorized(Errors.USER_OR_PASSWORD_INVALID);
