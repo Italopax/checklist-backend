@@ -1,8 +1,11 @@
 FEATURES
   libs na inicialização (helmet)
   rota de apagar/desabilita user
+  recuperar senha
+  grupos recorrentes (usuário define o tempo)
   middleware de validação de status da conta
   testes
+  CORS
 
 MELHORIAS
   ajustar importações para alias
@@ -14,11 +17,26 @@ MELHORIAS
     etc
   relação das tabelas cagegoria e itemsgroup
   lint e prettier
-  alterar o tipo dos ids (number -> uuid)
+  alterar o tipo dos ids (number -> uuid) -> tipagem no frontend
   utilizar função soft delete nativo do typeorm
   verificar se os services validam se recebem os parametros corretamente
   padronizar a passagem de id (seja pelo body ou parametro na requisição)
     - exemplo: controller de item
+  remover status do body das respostas
+  alterar o enum HttpStatus de lugar
+  importação das entidades na configuração do typeorm (fazer algo para não ter que declarar uma por uma)
+  logs
+  paginação
+  deletar itens quando um grupo é deletado
+  validar se o item pego é do mesmo userId que o token enviado
 
-Docker compose
+Docker
+  buidar e rodar diretamente o arquivo do dist
+  docker compose
+  https://www.youtube.com/watch?v=obtKdOW1pWQ
+
 Serviços da AWS
+  S3
+  Pinpoint
+  EC2
+  
