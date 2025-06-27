@@ -1,7 +1,7 @@
 services:
   app:
-    container_name: "app"
+    container_name: "checklist-backend"
     restart: always
     build: .
     ports:
-      - "3000:3030"
+      - "3020:3030"
