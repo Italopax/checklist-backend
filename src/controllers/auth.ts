@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { IAuthService } from "../services/interfaces/auth";
 import { IAuthController } from "./interfaces/auth";
 import { LoginCredentials } from "../models/interfaces";
-import { HttpStatus } from "../utils/error";
+import { HttpStatus } from "../models/enums";
 
 export class AuthController implements IAuthController {
   private readonly authService: IAuthService;

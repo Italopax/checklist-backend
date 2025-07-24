@@ -1,7 +1,7 @@
 import { UserCreateInput, UserUpdateInput } from "../models/entitiesTypes";
 import { ChangePasswordDTO } from "../models/interfaces";
 import { IUserService } from "../services/interfaces/user";
-import { HttpStatus } from "../utils/error";
+import { HttpStatus } from "../models/enums";
 import { IUserController } from "./interfaces/user";
 import { Request, Response } from "express";
 

@@ -1,6 +1,6 @@
 import { ItemCreateInput, ItemUpdateInput } from "../models/entitiesTypes";
 import { IItemService } from "../services/interfaces/item";
-import { HttpStatus } from "../utils/error";
+import { HttpStatus } from "../models/enums";
 import { IItemController } from "./interfaces/item";
 import { Request, Response } from "express";
 

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { IItemsGroupService } from "../services/interfaces/itemsGroup";
 import { IItemsGroupController } from "./interfaces/itemsGroup";
 import { ItemsGroupCreateInput, ItemsGroupUpdateInput } from "../models/entitiesTypes";
-import { HttpStatus } from "../utils/error";
+import { HttpStatus } from "../models/enums";
 
 export class ItemsGroupController implements IItemsGroupController {
   private readonly itemsGroupService: IItemsGroupService;
