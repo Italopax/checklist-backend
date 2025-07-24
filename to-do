@@ -1,14 +1,11 @@
 FEATURES
-  libs na inicialização (helmet)
   rota de apagar/desabilita user
   recuperar senha
   grupos recorrentes (usuário define o tempo)
   middleware de validação de status da conta
   testes
-  CORS
 
 MELHORIAS
-  banco de dados utilizando docker compose
   script para o deploy no ec2
   deploy automatizado com github actions
   ajustar importações para alias
