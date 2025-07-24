@@ -4,6 +4,7 @@ import { initializeEnvs } from "./constants";
 import { errorManager } from "./utils/error";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import helmet from "helmet";
 
 (async () => {
   const app = express();
@@ -11,6 +12,7 @@ import cors from "cors";
   
   app.use(cookieParser());
   app.use(express.json());
+  app.use(helmet());
 
   app.use(cors({
     origin: "http://localhost:3000",
