@@ -1,4 +1,15 @@
 services:
+  postgres:
+    image: postgres
+    container_name: "checklist-database"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   app:
     container_name: "checklist-backend"
     restart: always
@@ -20,17 +31,6 @@ services:
       EMAIL_SENDER_PORT:
       EMAIL_SENDER_SECURE:
       DEBBUG: true
-
-  postgres:
-    image: postgres
-    container_name: "checklist-database"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
