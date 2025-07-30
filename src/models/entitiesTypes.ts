@@ -14,6 +14,7 @@ export type UserType = BaseEntityType & {
   password?: string;
   status: UserStatus;
   verificationCode?: string | null;
+  recoveryPasswordVerificationCode?: string | null;
   categories?: CategoryType[];
   itemsGroups?: ItemsGroupType[];
 }

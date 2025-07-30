@@ -8,6 +8,8 @@ const router: Router = Router();
 const { userController } = Dependencies.getInstance();
 
 router.post("/create", errorHandler(userController.create));
+router.post("/send-recovery-passoword-verification-code", errorHandler(userController.sendRecoveryPasswordVerificationCode));
+router.post("/recovery-password", errorHandler(userController.recoveryPassowrd));
 router.get("/me", auth, errorHandler(userController.getMe));
 router.post("/verify-email", auth, errorHandler(userController.verifyEmailToken));
 router.put("/update", auth, errorHandler(userController.update));

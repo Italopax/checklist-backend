@@ -7,4 +7,6 @@ export interface IUserController {
   update(request: Request, response: Response): Promise<void>;
   changePassword(request: Request, response: Response): Promise<void>;
   resendVerificationCode(request: Request, response: Response): Promise<void>;
+  sendRecoveryPasswordVerificationCode(request: Request, response: Response): Promise<void>;
+  recoveryPassowrd(request: Request, response: Response): Promise<void>;
 }

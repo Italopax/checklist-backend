@@ -55,7 +55,28 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  public update = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean): Promise<UserType> => {
+  public selectByEmail = async(email: string, selectColumns?: Partial<Record<keyof UserType, boolean>>): Promise<UserType> => {
+    if (!email) return null;
+
+    return this.repository.findOne({
+      where: {
+        email,
+      },
+      ...(selectColumns && { select: selectColumns }),
+    });
+  }
+
+  public existUserByFields = async(fields: Partial<UserType>): Promise<boolean> => {
+    const fieldsIsValid = Object.values(fields).some((element) => element);
+
+    if (!fieldsIsValid) return null;
+
+    return this.repository.exists({
+      where: fields,
+    });
+  }
+
+  public update = async(id: number, userInfo: Partial<UserType>, makeVericationCodeNull?: boolean, makeRecoveryPasswordVericationCodeNull?: boolean): Promise<UserType> => {
     if (!id) return null;
 
     await this.repository.update(
@@ -68,7 +89,9 @@ export class UserRepository implements IUserRepository {
         ...(userInfo.email && { email: userInfo.email }),
         ...(userInfo.status && { status: userInfo.status }),
         ...(userInfo.verificationCode && { verificationCode: userInfo.verificationCode }),
+        ...(userInfo.recoveryPasswordVerificationCode && { recoveryPasswordVerificationCode: userInfo.recoveryPasswordVerificationCode }),
         ...(makeVericationCodeNull && { verificationCode: null }),
+        ...(makeRecoveryPasswordVericationCodeNull && { recoveryPasswordVerificationCode: null }),
       }
     );
 

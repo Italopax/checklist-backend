@@ -60,6 +60,20 @@ export class UserController implements IUserController{
     await this.userService.validateEmail(request.session, verificationCode);
     response.status(HttpStatus.NO_CONTENT).send();
   }
+  
+  public sendRecoveryPasswordVerificationCode = async (request: Request, response: Response): Promise<void> => {
+    const { email } = request.body;
+
+    await this.userService.sendRecoveryPasswordVerificationCode(email);
+    response.status(HttpStatus.NO_CONTENT).send();
+  }
+
+  public recoveryPassowrd = async (request: Request, response: Response): Promise<void> => {
+    const { email, verificationCode, newPassword } = request.body;
+
+    await this.userService.recoveryPassword(email, verificationCode, newPassword);
+    response.status(HttpStatus.NO_CONTENT).send();
+  }
 
   public resendVerificationCode = async (request: Request, response: Response): Promise<void> => {
     await this.userService.resendVerificationCode(request.session);

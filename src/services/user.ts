@@ -144,6 +144,55 @@ export class UserService implements IUserService {
     await this.userRepository.update(user.id, { verificationCode: randomCode });
   }
 
+  public sendRecoveryPasswordVerificationCode = async (email: string): Promise<void> => {
+    if (!validateEmail(email)) {
+      throw new BadRequest(Errors.INVALID_PARAMS)
+    }
+
+    const user = await this.userRepository.selectByEmail(email, {
+      id: true,
+    });
+ 
+    if (!user) {
+      throw new BadRequest(Errors.USER_NOT_FOUND)
+    } 
+
+    const randomCode = String(Math.floor(Math.random() * 1000000));
+
+    try {
+      await Email.sendEmail({
+        userEmail: email,
+        title: "Email de recuperação de senha.",
+        text: `Seu código de verificação é: ${randomCode}`,
+      })
+    } catch (error) {
+      console.log("Erro ao enviar o email com código de verificação.");
+      throw new BadRequest(Errors.EMAIL_SENDING_ERROR);
+    }
+
+    await this.userRepository.update(user.id, { recoveryPasswordVerificationCode: randomCode });
+  }
+
+  public recoveryPassword = async (email: string, verificationCode: string, newPassword: string): Promise<void> => {
+    const user = await this.userRepository.selectByEmail(email, {
+      id: true,
+      recoveryPasswordVerificationCode: true,
+    });
+
+    if (user.recoveryPasswordVerificationCode !== verificationCode) {
+      throw new BadRequest(Errors.INCORRECT_CODE);
+    }
+
+    const hashPassword = bcrypt.hashSync(newPassword, 10);
+
+    await this.userRepository.update(
+      user.id,
+      { password: hashPassword },
+      false,
+      true
+    );
+  }
+
   private validateUserPassword = async (user: UserType, password: string): Promise<boolean> => {
     if (!user || !password) throw new BadRequest(Errors.INVALID_PARAMS);
 

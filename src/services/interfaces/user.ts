@@ -8,4 +8,6 @@ export interface IUserService {
   updateUserPassword(session: Session, passwords: ChangePasswordDTO): Promise<void>;
   validateEmail(session: Session, verificationCode: string): Promise<void>;
   resendVerificationCode(session: Session): Promise<void>;
+  sendRecoveryPasswordVerificationCode(email: string): Promise<void>;
+  recoveryPassword(email: string, verificationCode: string, newPassword: string): Promise<void>;
 }
