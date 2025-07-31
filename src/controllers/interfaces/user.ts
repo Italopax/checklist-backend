@@ -9,4 +9,5 @@ export interface IUserController {
   resendVerificationCode(request: Request, response: Response): Promise<void>;
   sendRecoveryPasswordVerificationCode(request: Request, response: Response): Promise<void>;
   recoveryPassowrd(request: Request, response: Response): Promise<void>;
+  disableUser(request: Request, response: Response): Promise<void>;
 }

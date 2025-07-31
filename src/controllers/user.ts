@@ -79,4 +79,9 @@ export class UserController implements IUserController{
     await this.userService.resendVerificationCode(request.session);
     response.status(HttpStatus.NO_CONTENT).send();
   }
+
+  public disableUser = async (request: Request, response: Response): Promise<void> => {
+    await this.userService.disable(request.session);
+    response.status(HttpStatus.NO_CONTENT).send();
+  }
 }

@@ -10,4 +10,5 @@ export interface IUserService {
   resendVerificationCode(session: Session): Promise<void>;
   sendRecoveryPasswordVerificationCode(email: string): Promise<void>;
   recoveryPassword(email: string, verificationCode: string, newPassword: string): Promise<void>;
+  disable(session: Session): Promise<void>;
 }

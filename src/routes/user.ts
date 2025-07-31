@@ -15,5 +15,6 @@ router.post("/verify-email", auth, errorHandler(userController.verifyEmailToken)
 router.put("/update", auth, errorHandler(userController.update));
 router.patch("/update-password", auth, errorHandler(userController.changePassword));
 router.post("/resend-verification-code", auth, errorHandler(userController.resendVerificationCode));
+router.post("/disable", auth, errorHandler(userController.disableUser));
 
 export default router;

@@ -193,6 +193,12 @@ export class UserService implements IUserService {
     );
   }
 
+  public disable = async (session: Session): Promise<void> => {
+    await this.userRepository.update(session.user.id, {
+      status: UserStatus.INATIVE,
+    });
+  }
+
   private validateUserPassword = async (user: UserType, password: string): Promise<boolean> => {
     if (!user || !password) throw new BadRequest(Errors.INVALID_PARAMS);
 
