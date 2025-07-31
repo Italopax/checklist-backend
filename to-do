@@ -1,6 +1,4 @@
 FEATURES
-  rota de apagar/desabilita user
-  middleware de validação de status da conta
   script para o deploy na vps / deploy automatizado com github actions
   testes
   paginação
@@ -8,7 +6,6 @@ FEATURES
 
 MELHORIAS
   validar se o item pego é do mesmo userId que o token enviado
-  deletar itens quando um grupo é deletado
   utilizar função soft delete nativo do typeorm
   alterar o tipo dos ids (number -> uuid) -> tipagem no frontend
   verificar se os services validam se recebem os parametros corretamente
