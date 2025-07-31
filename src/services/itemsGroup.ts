@@ -1,14 +1,17 @@
 import { ItemsGroupCreateInput, ItemsGroupType, ItemsGroupUpdateInput } from "../models/entitiesTypes";
 import { Session } from "../models/interfaces";
+import { IItemRepository } from "../repositories/interfaces/item";
 import { IItemsGroupRepository } from "../repositories/interfaces/itemsGroup";
 import { BadRequest, Errors } from "../utils/error";
 import { IItemsGroupService } from "./interfaces/itemsGroup";
 
 export class ItemsGroupService implements IItemsGroupService {
   private readonly itemsGroupRepository: IItemsGroupRepository;
+  private readonly itemRepository: IItemRepository;
 
-  constructor(ItemsGroupRepository: IItemsGroupRepository) {
+  constructor(ItemsGroupRepository: IItemsGroupRepository, ItemsRepository: IItemRepository) {
     this.itemsGroupRepository = ItemsGroupRepository;
+    this.itemRepository = ItemsRepository;
   }
 
   public createItemsGroup = async (session: Session, itemsGroupInfos: ItemsGroupCreateInput): Promise<ItemsGroupType> => {
@@ -52,8 +55,9 @@ export class ItemsGroupService implements IItemsGroupService {
       throw new BadRequest(Errors.ITEMS_GROUP_NOT_FOUND);
     }
 
-    await this.itemsGroupRepository.update(itemsGroupId, {
-      deletedAt: new Date(),
-    });
+    await Promise.all([
+      this.itemsGroupRepository.update(itemsGroupId, {deletedAt: new Date()}),
+      this.itemRepository.deleteAllByItemGroupId(itemsGroupId),
+    ]);
   }
 }

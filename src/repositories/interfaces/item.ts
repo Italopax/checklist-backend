@@ -8,4 +8,5 @@ export interface IItemRepository {
   selectByIdWithItemsGroupAndUser(id: number): Promise<ItemType>;
   update(id: number, itemInfos: ItemUpdateInput): Promise<ItemType>;
   delete(id: number): Promise<void>;
+  deleteAllByItemGroupId(itemsGroupId: number): Promise<void>;
 }

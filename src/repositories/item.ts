@@ -66,4 +66,10 @@ export class ItemRepository implements IItemRepository {
   public delete = async (id: number): Promise<void> => {
     await this.repository.softDelete({ id });
   }
+
+  public deleteAllByItemGroupId = async (itemsGroupId: number): Promise<void> => {
+    await this.repository.softDelete({
+      itemsGroupId,
+    });
+  }
 }

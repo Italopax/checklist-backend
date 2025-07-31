@@ -91,7 +91,7 @@ class Dependencies implements IDependencies {
 
     this.userService = new UserService(this.userRepository);
     this.itemService = new ItemService(this.itemRepository, this.itemsGroupRepository);
-    this.itemsGroupService = new ItemsGroupService(this.itemsGroupRepository);
+    this.itemsGroupService = new ItemsGroupService(this.itemsGroupRepository, this.itemRepository);
     this.categoryService = new CategoryService(this.catetoryRepository);
     this.authService = new AuthService(this.userRepository);
 
