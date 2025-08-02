@@ -1,5 +1,6 @@
 export class Constants {
   debbug: boolean;
+  corsOriginsAllowed: string[] | string;
 
   database: {
     host: string;
@@ -25,6 +26,7 @@ export class Constants {
 
   constructor(props: { [key: string]: string }) {
     this.debbug = props.DEBBUG === 'true',
+    this.corsOriginsAllowed = props.CORS_ORIGINS_ALLOWED?.split(',') ?? "*",
 
     this.database = {
       host: props.DATABASE_HOST,

@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import { initializeEnvs } from "./constants";
+import { getEnv, initializeEnvs } from "./constants";
 import { errorManager } from "./utils/error";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -14,15 +14,18 @@ import helmet from "helmet";
   app.use(express.json());
   app.use(helmet());
 
+  await initializeEnvs({ ...process.env });
+
+  const corsOrigins: string[] | string = getEnv().corsOriginsAllowed;
+
   app.use(cors({
-    origin: ["http://localhost:3000", "*"],
+    origin: corsOrigins,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
     credentials: true,
   }));
   
-  await initializeEnvs({ ...process.env });
 
   const { AppDataSource } = require("./database");
   const { router} = require("./routes");
