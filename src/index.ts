@@ -16,16 +16,15 @@ import helmet from "helmet";
 
   await initializeEnvs({ ...process.env });
 
-  const corsOrigins: string[] | string = getEnv().corsOriginsAllowed;
+  const corsOrigin: string = getEnv().corsOriginsAllowed;
 
   app.use(cors({
-    origin: corsOrigins,
+    origin: corsOrigin,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
     credentials: true,
   }));
-  
 
   const { AppDataSource } = require("./database");
   const { router} = require("./routes");
