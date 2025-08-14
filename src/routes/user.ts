@@ -11,7 +11,7 @@ const { userController } = Dependencies.getInstance();
 router.post("/create", errorHandler(userController.create));
 router.post("/send-recovery-passoword-verification-code", errorHandler(userController.sendRecoveryPasswordVerificationCode));
 router.post("/recovery-password", errorHandler(userController.recoveryPassowrd));
-router.get("/me", auth, validateUserStatus, errorHandler(userController.getMe));
+router.get("/me", auth, errorHandler(userController.getMe));
 router.post("/verify-email", auth, validateUserStatus, errorHandler(userController.verifyEmailToken));
 router.put("/update", auth, validateUserStatus, errorHandler(userController.update));
 router.patch("/update-password", auth, validateUserStatus, errorHandler(userController.changePassword));
