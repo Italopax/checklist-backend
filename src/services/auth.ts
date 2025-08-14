@@ -31,7 +31,7 @@ export class AuthService implements IAuthService {
       name,
       value: tokenValue,
       options: {
-        httpOnly: false,
+        httpOnly: true,
         secure: true,
         maxAge,
       },
