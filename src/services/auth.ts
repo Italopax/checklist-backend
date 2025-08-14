@@ -5,6 +5,7 @@ import { IUserRepository } from "../repositories/interfaces/user";
 import { BadRequest, Errors, Unauthorized } from "../utils/error";
 import { IAuthService } from "./interfaces/auth";
 import bcrypt from "bcrypt";
+import { Response } from "express";
 import { getEnv } from "../constants";
 
 const ConstantEnvs = getEnv();
@@ -111,5 +112,11 @@ export class AuthService implements IAuthService {
     return {
       accessToken,
     };
+  }
+
+  public logout = async (response: Response, cookies: string[]): Promise<void> => {
+    cookies.forEach((cookie) => {
+      response.clearCookie(cookie);
+    });
   }
 }

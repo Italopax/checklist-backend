@@ -1,3 +1,4 @@
+import { Response } from "express";
 import { CookieObjectData, LoginAcessTokens, LoginCookiesData, LoginCredentials } from "../../models/interfaces";
 
 export interface IAuthService {
@@ -5,4 +6,5 @@ export interface IAuthService {
   getNewAccesTokenData(refreshToken: string): Promise<CookieObjectData>
   getAccessTokens({ email, password }: LoginCredentials): Promise<LoginAcessTokens>;
   refreshAccessToken(refreshToken: string): Promise<{ accessToken: string}>;
+  logout(cookiesFunction: Response, cookies: string[]): Promise<void>;
 }

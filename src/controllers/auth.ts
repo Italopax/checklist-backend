@@ -72,4 +72,9 @@ export class AuthController implements IAuthController {
       }
     });
   }
+
+  public logout = async (request: Request, response: Response): Promise<void> => {
+    await this.authService.logout(response, Object.keys(request.cookies))
+    response.status(HttpStatus.NO_CONTENT).send();
+  }
 }
