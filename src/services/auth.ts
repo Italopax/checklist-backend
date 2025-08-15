@@ -35,6 +35,8 @@ export class AuthService implements IAuthService {
         httpOnly: true,
         secure: true,
         maxAge,
+        domain: ConstantEnvs.jwt.domain,
+        sameSite: ConstantEnvs.jwt.sameSite,
       },
     }
   }

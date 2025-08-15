@@ -1,4 +1,5 @@
 import { UserType } from "./entitiesTypes";
+import { SameSiteCookieConfiguration } from "./types";
 
 export interface Session {
   user: Required<UserType>;
@@ -11,6 +12,8 @@ export interface CookieObjectData {
     httpOnly: boolean;
     secure: boolean;
     maxAge: number;
+    domain?: string;
+    sameSite?: SameSiteCookieConfiguration;
   };
 };
 

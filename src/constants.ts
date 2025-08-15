@@ -1,3 +1,5 @@
+import { SameSiteCookieConfiguration } from "./models/types";
+
 export class Constants {
   debbug: boolean;
   corsOriginsAllowed: string;
@@ -14,6 +16,8 @@ export class Constants {
     secretKey: string;
     accessTokenExpiration: number;
     refreshTokenExpiration: number;
+    domain?: string;
+    sameSite?: SameSiteCookieConfiguration;
   }
 
   email: {
@@ -40,6 +44,8 @@ export class Constants {
       secretKey: props.JWT_SECRET,
       accessTokenExpiration: Number(props.ACCESS_TOKEN_EXPIRATION),
       refreshTokenExpiration: Number(props.REFRESH_TOKEN_EXPIRATION),
+      domain: props.TOKEN_DOMAIN,
+      sameSite: props.TOKEN_SAME_SITE as SameSiteCookieConfiguration,
     }
 
     this.email = {
