@@ -28,6 +28,11 @@ export class Constants {
     secure: boolean;
   }
 
+  cookies: {
+    domain: string;
+    path: string;
+  }
+
   constructor(props: { [key: string]: string }) {
     this.debbug = props.DEBBUG === 'true',
     this.corsOriginsAllowed = props.CORS_ORIGINS_ALLOWED,
@@ -54,6 +59,11 @@ export class Constants {
       host: props.EMAIL_SENDER_HOST,
       port: Number(props.EMAIL_SENDER_PORT),
       secure: Boolean(props.EMAIL_SENDER_SECURE),
+    }
+
+    this.cookies = {
+      domain: props.COOKIES_DOMAIN,
+      path: props.COOKIES_PATH || '/',
     }
   }
 }

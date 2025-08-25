@@ -118,7 +118,10 @@ export class AuthService implements IAuthService {
 
   public logout = async (response: Response, cookies: string[]): Promise<void> => {
     cookies.forEach((cookie) => {
-      response.clearCookie(cookie);
+      response.clearCookie(cookie, {
+        domain: ConstantEnvs.cookies.domain,
+        path: ConstantEnvs.cookies.path,
+      });
     });
   }
 }
